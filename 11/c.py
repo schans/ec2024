@@ -14,29 +14,23 @@ for line in fileinput.input():
     l = line.strip()
     if not l:
         continue
-
     p = l.split(':')
     R[p[0]] = p[1].split(',')
 
-print(R)
-
-for s in R.keys():
+for s in R:
     P = dict()
     P[s] = 1
     for _ in range(DAYS):
         NP = dict()
-        for p in P.keys():
+        for p in P:
             for n in R[p]:
                 if n in NP:
                     NP[n] = NP[n] + P[p]
                 else:
                     NP[n] = P[p]
-                # print(f'{p=} {n=} {NP[n]=}')
         P = NP
-        print(P)
-    psum = sum([P[p] for p in P])
+    psum = sum(P.values())
     minr = min(minr, psum)
     maxr = max(maxr, psum)
-    print(minr, maxr)
 
 print(f"{maxr - minr}")
