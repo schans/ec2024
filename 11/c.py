@@ -18,14 +18,13 @@ for line in fileinput.input():
     R[p[0]] = p[1].split(',')
 
 for s in R:
-    P = dict()
-    P[s] = 1
+    P = {s: 1}
     for _ in range(DAYS):
         NP = dict()
         for p in P:
             for n in R[p]:
                 if n in NP:
-                    NP[n] = NP[n] + P[p]
+                    NP[n] += P[p]
                 else:
                     NP[n] = P[p]
         P = NP
